@@ -1,0 +1,10 @@
+.idea/*
+.metadata/
+.DS_Store
+.settings
+.gitattributes
+*.iml
+npm-debug.log
+/bin
+
+
