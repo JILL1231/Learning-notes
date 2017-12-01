@@ -1,10 +1,10 @@
-###数据类型
+### 数据类型
 基本类型：undefined null boolean number string
 
 复杂数据类型：object
 
 
-####typeof操作符
+#### typeof操作符
 对一个值使用typeof操作符可能返回下列某个字符串
 ```
 "undefined"——如果这个值未定义
@@ -16,7 +16,7 @@
 "function"——如果这个值是函数
 ```
 
-####undefined类型
+#### undefined类型
 ```undefined```类型只有一个值，即特殊的```undefined```
 ```
 var message; //声明未初始化
@@ -25,7 +25,7 @@ alert( typeof aa ); undefined  - aa 未声明
 ```
 结果表明，对未声明和未初始化的变量执行```typeof```操作符都返回了```undefined```值
 
-####null类型
+#### null类型
 ```null```类型只有一个值，即特殊的```null```，从逻辑角度来看，```null```值表示一个空对象指针，这也正式```typeof```操作符检测```null```值时会返回```object```
 
 如果定义的变量准备在将来用于保存对象，那么最好将该变量初始化为```null```而不是其他值。这样一来，只要直接检查```null```值就可以知道相应的变量是否已经保存了一个对象的引用
@@ -40,7 +40,7 @@ if(car != null){
 alert(null == undefined);//true
 ```
 
-####boolean类型
+#### boolean类型
 可以对任何数据类型的值调用```Boolean()```函数，而且总会返回一个boolean值。至于返回的这个值是```true``` 还是 ```false``` ，取决于要转换值的数据类型及气实际值
 
 
@@ -53,7 +53,7 @@ alert(null == undefined);//true
 | Object        | 任何对象         | null           |
 
 
-####number类型
+#### number类型
 1、整数
 
     八进制（严格模式下是无效的）
@@ -124,7 +124,7 @@ NaN两个特点：
     var num6 = parseFloat("098.21.21");//98.21  ,第一个小数点有效，第二个开始就无效了
     
     
-####String类型    
+#### String类型    
     
 1、字符字面量（转义序列）
     
@@ -164,7 +164,7 @@ NaN两个特点：
     console.log(String(val2));//"null"
     console.log(String(val3));//"undefined"
     
-####Object类型
+#### Object类型
  object的每个实例都具有下列属性和方法
     
    
