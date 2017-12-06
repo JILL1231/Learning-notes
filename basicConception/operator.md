@@ -166,9 +166,9 @@ var moveToRight = val >> 5; //2
 var val = -64;
 var moveToRight = val >>> 5; //134217726
 ```
-图解
-![位操作符](https://static.oschina.net/uploads/img/201712/05114652_EUUj.jpg "位操作符")
-
+图解 
+![位操作符](https://static.oschina.net/uploads/img/201712/05114652_EUUj.jpg"位操作符")
+如果图片展示不了，可点击链接 https://static.oschina.net/uploads/img/201712/05114652_EUUj.jpg
 #### 布尔操作符
 #### 1、逻辑非 !
 逻辑非操作符可以应用于ES中的任何值。逻辑非操作符首先会将它的操作数转换为一个布尔值，然后再对其求反。
