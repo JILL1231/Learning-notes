@@ -166,8 +166,9 @@ var moveToRight = val >> 5; //2
 var val = -64;
 var moveToRight = val >>> 5; //134217726
 ```
-图解 
-![位操作符](https://static.oschina.net/uploads/img/201712/05114652_EUUj.jpg"位操作符")
+图解
+![位操作符](https://static.oschina.net/uploads/img/201712/05114652_EUUj.jpg "位操作符")
+
 如果图片展示不了，可点击链接 https://static.oschina.net/uploads/img/201712/05114652_EUUj.jpg
 #### 布尔操作符
 #### 1、逻辑非 !
