@@ -20,7 +20,12 @@
 [3、语句](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/statement.md)
 
 [4、函数](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/function.md)
-#### 二、变量、作用域和内存问题
+
+[5、变量](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/variate.md)
+
+[6、作用域](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/scope.md)
+
+[7、内存问题](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/memory.md)
 
 #### 三、引用类型
 
