@@ -18,6 +18,8 @@
 [2、操作符](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/operator.md)
 
 [3、语句](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/statement.md)
+
+[4、函数](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/function.md)
 #### 二、变量、作用域和内存问题
 
 #### 三、引用类型
