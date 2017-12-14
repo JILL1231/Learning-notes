@@ -58,6 +58,10 @@ f();
 #### 标记清除垃圾收集
 这个算法把“对象是否不再需要”简化定义为“对象是否可以获得”。
 
-这个算法假定设置一个叫做根（root）的对象（在Javascript里，根是全局对象）。定期的，垃圾回收器将从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和所有不能获得的对象。
+这个算法假定设置一个叫做根（root）的对象（在JavaScript中，可以充当根的全局变量是“window”对象。 Node.js中的相同对象称为“global”）。定期的，垃圾回收器将检查所有根和他们的孩子并且标记他们是活跃的（意思，他们不是垃圾），任何根不能达到的将被标记为垃圾。最后，垃圾回收器释放所有未标记为活动的内存块，并将该内存返回给操作系统。
+
+![标记清除垃圾收集](https://cdn-images-1.medium.com/max/1600/1*WVtok3BV0NgU95mpxk9CNg.gif "标记清除垃圾收集")
 ##### 限制: 那些无法从根对象查询到的对象都将被清除
+
+[了解更多](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
 
