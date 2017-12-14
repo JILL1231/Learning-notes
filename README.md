@@ -13,7 +13,7 @@
 
 #### 一、基本概念
 
-[1、数据类型](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/dataType.md)
+[1、基本数据类型](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/datatype.md)
 
 [2、操作符](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/operator.md)
 
@@ -27,9 +27,27 @@
 
 [7、内存问题](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/memory.md)
 
-#### 三、引用类型
+#### 二、引用类型
+[1、Object类型](https://github.com/JILL1231/Learning-notes/blob/master/ReferenceTypes/object.md)
 
-#### 四、面向对象的程序设计
+[2、Array类型](https://github.com/JILL1231/Learning-notes/blob/master/ReferenceTypes/array.md)
+
+[3、Date类型](https://github.com/JILL1231/Learning-notes/blob/master/ReferenceTypes/date.md)
+
+[4、RegExp类型](https://github.com/JILL1231/Learning-notes/blob/master/ReferenceTypes/regexp.md)
+
+[5、Function类型](https://github.com/JILL1231/Learning-notes/blob/master/ReferenceTypes/function.md)
+
+[6、基本包装类型](https://github.com/JILL1231/Learning-notes/blob/master/ReferenceTypes/packingtype.md)
+
+[7、单体内置对象](https://github.com/JILL1231/Learning-notes/blob/master/ReferenceTypes/builtin.md)
+
+#### 三、面向对象的程序设计
+[1、面向对象的理解](https://github.com/JILL1231/Learning-notes/blob/master/oop/understand.md)
+
+[2、创建对象](https://github.com/JILL1231/Learning-notes/blob/master/oop/create.md)
+
+[3、对象的继承](https://github.com/JILL1231/Learning-notes/blob/master/oop/inheritance.md)
 
 #### 五、函数表达式
 
