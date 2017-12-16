@@ -148,21 +148,156 @@ console.log(vals.sort(compare)); //(5) [0, 1, 5, 10, 15]
 console.log(vals.sort(descompare)); //(5) [15, 10, 5, 1, 0]
 ```
 #### 操作方法
+concat()方法可以基于当前数组中的所有项创建一个新数组。具体来说，这个方法会先创建当前数组一个副本，然后将接收到的参数添加到这个副本的末尾，最后返回新构建的数组
+```
+var clos = ["red","blue","green"];
+var oo = new Object();
+
+var clos2 = clos.concat();  //在没有给concat()方法传递参数的情况下，它只是复制当前数组并返回副本
+var clos3 = clos.concat(["black","pink"],["brown"]);//如果传递给concat()方法的是一或多个数组，则该方法会将这些数组中的每一项都添加到结果数组中
+var clos4 = clos.concat("black",12,oo);//如果传递的值不是数组，这些值就会被简单的添加到结果数组的末尾
+
+console.log(clos2);//(3) ["red", "blue", "green"]
+console.log(clos3);//(6) ["red", "blue", "green", "black", "pink", "brown"]
+console.log(clos4);//(6) ["red", "blue", "green", "black", 12, {…}]
+console.log(clos);//(3) ["red", "blue", "green"]
 ```
 
+slice()[片、截取]方法能够基于当前数组中的一或多个项创建一个新数组，它接受一或两个参数，即要返回项的起始和结束位置。slice()方法不会影响原始数组
+
+```
+var clos = ["red", "blue", "green", "black", "brown"]
+
+var clos1 = clos.slice(1); //在只有一个参数的情况下，slice()方法返回从该参数指定位置开始到当前数组末尾的所有项
+var clos2 = clos.slice(1,3);//两个参数，该方法返回起始和结束位置之间的项——但不包括结束位置的项
+var clos3 = clos.slice(-3,-1);//若参数中有负数，则用数组长度加上该数来确定形影的位置
+var clos4 = clos.slice(-1,-3);//若结束位置小于起始位置，则返回空数组
+console.log(clos1);//(4) ["blue", "green", "black", "brown"]
+console.log(clos2);//(2) ["blue", "green"]
+console.log(clos3);//(2) ["green", "black"]  数组长度5，则相当于slice(2,4);
+console.log(clos4);//[]
+console.log(clos); //(5) ["red", "blue", "green", "black", "brown"]
+```
+
+splice()[拼接]方法始终都会返回一个数组，该数组中包含从原始数组中删除的项(若没有删除任何项，则返回一个空数组)，它的主要用途是向数组的中部插入项，使用这种方法的方式有3种：
+
+1、删除：可以删除任意数量的项，只需指定2个参数：要删除的第一项的位置和要删除的项数
+```
+splice(0,2)会删除数组的前两项
+
+var clos = ["red", "blue", "green", "black", "brown"];
+var removed = clos.splice(0,2);
+console.log(clos);//(3) ["green", "black", "brown"]
+console.log(removed);//(2) ["red","blue"]
+```
+2、插入：可以向指定位置插入任意数量的项，只需提供三个参数：起始位置、0（要删除的项数）、要插入的项。如果要插入多个项，可以再传入第四、第五，以致任意多个项
+```
+splice(2,0,"red","green")会从当前数组的位置2开始插入字符串"red","green"
+
+var clos = ["red", "blue", "green", "black", "brown"];
+var removed = clos.splice(2,0,"red","green");
+console.log(clos);//(7) ["red", "blue", "red", "green", "green", "black", "brown"]
+console.log(removed);//[]
+```
+3、替换：可以向指定位置插入任意数量的项，且同时删除任意数量的项，只需指定3个参数：起始位置、要删除的项数、要插入的任意数量的项。插入的项数不必与删除的项数相等
+```
+splice(2,1,"red","green")会删除当前位置2的项，然后再从位置2开始插入字符串"red","green"
+
+var clos = ["red", "blue", "green", "black", "brown"];
+var removed = clos.splice(2,1,"red","green");
+console.log(clos);//(3) ["red", "blue", "red","green", "black", "brown"];
+console.log(removed);//["green"]
 ```
 
 #### 位置方法
-```
+ES为数组实例添加了两个位置方法：indexOf()和lastIndexOf()。这两个方法都接收两个参数：要查找的项和表示查找起点位置的索引（可选）。这两个方法都返回要查找的项在数组中的位置，或者在没找到的情况下返回-1
 
+
+```
+//indexOf()方法从数组的开头（位置0）开始向后查找
+//lastIndexOf()方法则从数组的末尾开始向前查找
+
+var clos = ["red", "blue", "green", "black", "brown", "blue"];
+
+console.log(clos.indexOf("blue")); //1
+console.log(clos.lastIndexOf("blue"));//5，注意：不是0哦，索引是从前开始数的
+console.log(clos.lastIndexOf("blue",3));//1
+console.log(clos.indexOf("aa"));//-1
 ```
 
 #### 迭代方法
-```
+ES为数组定义了5个迭代方法。每个方法都接收两个参数：要在每一项上运行的函数和运行该函数的作用域对象——影响this的值。传入这些方法中的函数会接收三个参数：数组项的值、该项在数组中的位置和数组对象本身，以下是这5个迭代方法的作用及用例
 
 ```
+var num = [1,2,3,4,5,6,5,4,3,2];
+
+function fun(item,index,arr){
+    return item > 2;
+}
+
+function funMap(item,index,arr){
+    return item * 2;
+}
+```
+
+every()和some()方法都用于查询数组中的项是否满足某个条件
+
+``` 
+//every():对数组中的每一项运行给定函数，如果该函数对每一项都返回true，则返回true  ［巧记：与］
+
+//some():对数组中的每一项运行给定函数，如果该函数对任一项返回true，则返回true ［巧记：或］
+
+var everyResult = num.every(fun);
+var someResult = num.some(fun);
+
+console.log(everyResult);//false
+console.log(someResult);//true
+```
+
+filter()方法用于查询符合某些条件的所有数组项
+```
+//filter():对数组中的每一项运行给定函数，返回该函数会返回true的项组成的数组
+
+var filterResult = num.filter(fun);
+console.log(filterResult);//(7) [3, 4, 5, 6, 5, 4, 3]
+```
+
+map()方法适合创建包含的项与另一个数组一一对应的数组
+```
+//map():对数组中的每一项运行给定函数，返回每次函数调用的结果组成的数组
+
+var mapResult = num.map(funMap);
+console.log(mapResult);//(10) [2, 4, 6, 8, 10, 12, 10, 8, 6, 4]
+```
+
+forEach()方法只是对数组中的每一项运行传入，本质上与使用for循环迭代数组一样
+```
+//forEach():对数组中的每一项运行给定函数，这个方法没有返回值
+
+num.forEach(function(item,index,arr){
+    //执行某些操作
+});
+
+```
+
 
 #### 归并方法
-```
+reduce()和reduceRight()这两个方法都会迭代数组的所有项，然后构建一个最终返回的值。这两个方法都接收两个参数：一个在每一项上调用的函数和作为归并基础的初始值（可选）。传给reduce()和reduceRight()的函数接收四个参数：前一个值、当前值、项的索引和数组对象。这个函数返回的任何值都会作为第一个参数自动传给下一项。第一次迭代发生在数组的第二项上，因此第一个参数是数组的第一项，第二个参数是数组的第二项
 
+例如：求数组中所有值之和
+
+```
+// reduce()方法从数组第一项开始，逐个遍历到最后
+// reduceRight()方法则从数组的最后一项开始，向前遍历到第一项
+
+var num = [1,2,3,4,5,6,5,4,3,2];
+function func(prev,cur,index,arr){
+    return prev+cur;
+}
+
+var sumReduce = num.reduce(func);//第一次执行回调函数，prev是1，cur是2。第二次，prev是3(1+2的结果)，cur是3(第三项)，这个过程会持续到吧数组中的每一项都访问一遍，最后返回结果
+console.log(sumReduce);//35
+
+var sumReduceRight = num.reduceRight(func);//reduceRight()的作用与reduce()类似，只不过方向相反而已,第一次执行回调函数，prev是2，cur是3
+console.log(sumReduceRight);//35
 ```
