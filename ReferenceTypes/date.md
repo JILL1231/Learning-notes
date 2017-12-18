@@ -23,7 +23,7 @@ var UTCDate = new Date(Date.UTC(2017,11,18,17));//若没提供天数，则默认
 getTime():返回表示日期的毫秒数，与valueOf()方法返回的值相同
 setTime():以毫秒数设置日期，会改变整个日期
 
-//年、月、天、时、分钟、秒、毫秒
+//年(Year)、月(Month)、天(Date)、时(Hours)、分钟(Minutes)、秒(Seconds)、毫秒(Milliseseconds)
 getFullYear():取得4位数的年份
 getUTCFullYear():返回UTC日期的4位数年份
 setFullYear():设置日期的年份，传入的年份值必须是4位数字
