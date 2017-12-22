@@ -54,6 +54,7 @@
 [1、this](https://github.com/JILL1231/Learning-notes/blob/master/this/this.md)
 
 #### 六、BOM
+[1、window对象](https://github.com/JILL1231/Learning-notes/blob/master/bom/window.md)
 
 #### 七、客户端检测
 
