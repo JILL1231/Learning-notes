@@ -30,13 +30,13 @@ alert(instance.getSuperValue());//true
 
 
 这个例子中的实例以及构造函数和原型之间的关系如下图
-![实例以及构造函数和原型之间的关系](https://static.oschina.net/uploads/img/201707/19101017_Y2NN.jpg "实例以及构造函数和原型之间的关系")
+![实例以及构造函数和原型之间的关系](https://static.oschina.net/uploads/img/201707/19101017_Y2NN.jpg)
 
 
 所有函数的默认原型都是Object的实例，因此默认原型都会包含一个内部指针，指向Object.prototype。注意，我们没有使用SubType默认提供的原型，而是给它换了一个新原型，这个新原型就是SuperType的实例，因此，这个新原型不仅具有作为一个SuperType的实例所拥有的全部属性和方法，而且其内部还有一个指针，指向了SuperType的原型。
 
 instance指向SubType的原型，SubType的原型又指向SuperType的原型。getSuperValue()方法仍然还在SuperType.prototype 中，但property则位于SubType.prototype 中。这是因为property是一个实例属性，而getSuperValue()则是一个原型方法。
-### #确定原型和实例的关系
+#### 确定原型和实例的关系
 1、使用 instanceof 操作符来测试 实例 与 原型链中出现过的构造函数，结果就会返回true
 ```
 alert(instance instanceof Object);//true
