@@ -25,7 +25,11 @@
 
 [6、作用域](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/scope.md)
 
-[7、内存问题](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/memory.md)
+[7、闭包](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/closure.md)
+
+[8、this](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/this.md)
+
+[9、内存问题](https://github.com/JILL1231/Learning-notes/blob/master/basicConception/memory.md)
 
 #### 二、引用类型
 [1、Object类型](https://github.com/JILL1231/Learning-notes/blob/master/ReferenceTypes/object.md)
@@ -51,7 +55,7 @@
 
 #### 五、函数表达式
 
-[1、this](https://github.com/JILL1231/Learning-notes/blob/master/this/this.md)
+
 
 #### 六、BOM
 [1、window对象](https://github.com/JILL1231/Learning-notes/blob/master/bom/window.md)

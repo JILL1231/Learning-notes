@@ -84,3 +84,14 @@ var objSayColor = sayColor.bind(o);
 objSayColor();//blue
 
 ```
+### 递归
+递归函数是在一个函数通过名字调用自身的情况下构成的
+``` 
+function factorial(num){
+    if(num <= 1){
+        return 1;
+    }else{
+        return num * factorial(num-1);
+    }
+}
+```

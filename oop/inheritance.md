@@ -50,7 +50,7 @@ alert(SuperType.prototype.isPrototypeOf(instance));//true
 alert(subType.prototype.isPrototypeOf(instance));//true
 ```
 
-### #谨慎的定义方法
+#### 谨慎的定义方法
 1、给原型添加方法的代码一定要放在替换原型的语句之后,如下
 
 ```
