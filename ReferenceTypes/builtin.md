@@ -49,7 +49,7 @@ function sayColor(){
 }
 window.sayColor();//"red"
 ```
-JS中的window对象除了扮演ES规定的Global对象的角色之外，[还承担了很多别的任务](https://github.com/JILL1231/Learning-notes/blob/master/bom/window.md)
+JS中的window对象除了扮演ES规定的Global对象的角色之外，[还承担了很多别的任务](https://developer.mozilla.org/zh-CN/docs/Web/API/Window)
 
 #### Math对象
 ES为保存数学公式和信息提供了一个公共位置，即Math对象

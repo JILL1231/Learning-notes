@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type = "button" value = "click me" id="myBtn"/>
+<script type="text/javascript">
+    var EventUtil = {
+        addHandle:function(element,type,handler){
+            if(element.addEventListener){
+                element.addEventListener(type,handler,false);
+            }else if(element.attachEvent){
+                element.attachEvent("on"+type,handler);
+            }else{
+                element["on"+type] = handler;
+            }
+        },
+        removeHandle:function(element,type,handler){
+            if(element.removeEventListener){
+                element.removeEventListener(type,handle,false);
+            }else if(element.removeEventListener){
+                element.detachEvent("on"+type,handle);
+            }else{
+                element["on"+type] = null;
+            }
+        }
+    };
+
+    var btn = document.getElementById("myBtn");
+    var handler = function(){
+        alert(this.id);
+    }
+
+    EventUtil.addHandle(btn,"click",handler);
+    EventUtil.removeHandle(btn,"click",handler);
+</script>
+</body>
+</html>
