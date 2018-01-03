@@ -6,35 +6,21 @@
 </head>
 <body>
 <input type = "button" value = "click me" id="myBtn"/>
+<a href = "https://developer.mozilla.org/zh-CN/docs/Web/API/ChildNode" id = "myLink">link</a>
 <script type="text/javascript">
-    var EventUtil = {
-        addHandle:function(element,type,handler){
-            if(element.addEventListener){
-                element.addEventListener(type,handler,false);
-            }else if(element.attachEvent){
-                element.attachEvent("on"+type,handler);
-            }else{
-                element["on"+type] = handler;
-            }
-        },
-        removeHandle:function(element,type,handler){
-            if(element.removeEventListener){
-                element.removeEventListener(type,handle,false);
-            }else if(element.removeEventListener){
-                element.detachEvent("on"+type,handle);
-            }else{
-                element["on"+type] = null;
-            }
-        }
-    };
-
     var btn = document.getElementById("myBtn");
-    var handler = function(){
-        alert(this.id);
+    btn.onclick = function(event){
+        alert("clicked");
+        event.stopPropagation();
+    };
+    document.body.onclick = function(event){
+        alert("body clicked");
     }
 
-    EventUtil.addHandle(btn,"click",handler);
-    EventUtil.removeHandle(btn,"click",handler);
+    var link = document.getElementById("myLink");
+    link.addEventListener("click",function(event){
+        event.preventDefault();
+    },false)
 </script>
 </body>
 </html>

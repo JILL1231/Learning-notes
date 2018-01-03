@@ -63,9 +63,9 @@
 
 #### 六、事件
 
-[1、事件流](https://github.com/JILL1231/Learning-notes/blob/master/event/eventflow.md)
+[1、事件处理程序](https://github.com/JILL1231/Learning-notes/blob/master/event/eventHandler.md)
 
-[](https://github.com/JILL1231/Learning-notes/blob/master/event/)
+[2、事件对象](https://github.com/JILL1231/Learning-notes/blob/master/event/eventObj.md)
 
 [](https://github.com/JILL1231/Learning-notes/blob/master/event/)
 
