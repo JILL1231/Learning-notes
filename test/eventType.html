@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            min-height:30px;width:100%;background:pink;word-wrap:break-word
+        }
+        .inner{
+            min-height:30px;width:50%;background:lightblue;word-wrap:break-word;margin: auto;padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box1">鼠标移入时，触发mouseover、mouseenter和mousemove事件</div>
+<button id="reset1">还原鼠标移入前</button>
+<script>
+    document.getElementById("reset1").onclick = function(){history.go();}
+    var oBox1 = document.getElementById('box1');
+    oBox1.onmouseover = oBox1.onmouseenter=oBox1.onmousemove =function(e){
+        e = e || event;
+        oBox1.innerHTML += e.type+ ';';
+    }
+</script>
+
+<div class="box" id="box2">鼠标移出时，触发mousemove、mouseleave和mouseout事件</div>
+<button id="reset2">鼠标移出前</button>
+<script>
+    document.getElementById("reset2").onclick = function(){history.go();}
+    var oBox2 = document.getElementById('box2');
+    oBox2.onmousemove = oBox2.onmouseleave=oBox2.onmouseout =function(e){
+        e = e || event;
+        oBox2.innerHTML += e.type+ ';';
+    }
+</script>
+
+<div class="box" id="box3">双击鼠标时，触发mousedown、mouseup、click、dblclick事件</div>
+<button id="reset3">双击鼠标前</button>
+<script>
+    document.getElementById("reset3").onclick = function(){history.go();}
+    var oBox3 = document.getElementById('box3');
+    oBox3.onclick = oBox3.ondblclick=oBox3.onmousedown=oBox3.onmouseup =function(e){
+        e = e || event;
+        oBox3.innerHTML += e.type+ ';';
+    }
+</script>
+
+<div class="box" id="box4">嵌套元素的移入移出时，触发mouseover、mouseenter、mouseleave、mouseout事件
+    <div class="inner" id="inner"></div>
+</div>
+<button id="reset4">嵌套元素的移入移出前</button>
+<script>
+    document.getElementById("reset4").onclick = function(){history.go();}
+    var oBox4 = document.getElementById('box4');
+    var oInner4 = document.getElementById("inner");
+    oInner4.onmouseenter = oInner4.onmouseleave = oInner4.onmouseover=oInner4.onmouseout = oBox4.onmouseenter = oBox4.onmouseleave = oBox4.onmouseover=oBox4.onmouseout = function (e) {
+        oInner4.innerHTML += e.currentTarget.id.slice(0,1)  + ':' +e.type + ';';
+    }
+</script>
+</body>
+</html>

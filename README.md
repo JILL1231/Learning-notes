@@ -67,7 +67,7 @@
 
 [2、事件对象](https://github.com/JILL1231/Learning-notes/blob/master/event/eventObj.md)
 
-[](https://github.com/JILL1231/Learning-notes/blob/master/event/)
+[3、事件类型](https://github.com/JILL1231/Learning-notes/blob/master/event/eventType.md)
 
 [](https://github.com/JILL1231/Learning-notes/blob/master/event/)
 

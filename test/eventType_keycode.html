@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="myText" value="">
+<script type="text/javascript" src="EventUtil.js"></script>
+<script type="text/javascript">
+    var textBox = document.getElementById("myText");
+
+//    EventUtil.addHandler(textBox,"keypress",function (event) {
+//        event = EventUtil.getEvent(event);
+//        console.log(EventUtil.getCharCode(event));
+//    })
+//
+//    EventUtil.addHandler(textBox,"textInput",function (event) {
+//        event = EventUtil.getEvent(event);
+//        console.log(event.data);
+//    })
+
+    //确定浏览器是否支持复合事件
+    var isSupported = document.implementation.hasFeature("CompositionEvent","3.0");
+    console.log(isSupported);
+    EventUtil.addHandler(textBox,"compositionstart",function (event) {
+        event = EventUtil.getEvent(event);
+        console.log(event.data);
+    })
+
+    EventUtil.addHandler(window,"beforeunload",function (event) {
+        event = EventUtil.getEvent(event);
+        var message = "您将会离开这个页面";
+        //为了显示这个弹出对话框，必须将event.returnValue的值设置为要显示给用户的字符串,同时作为函数值返回
+        event.returnValue = message;
+        return message;
+    })
+
+    EventUtil.addHandler(document,"readystatechange",function (event) {
+        if(document.readyState == "interactive" || document.readyState == "complete"){
+            EventUtil.removeHandle(document,"readystatechange",arguments.callee);
+            console.log("content loaded");
+        }
+    })
+</script>
+</body>
+</html>

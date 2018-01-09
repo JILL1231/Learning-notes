@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上下文菜单</title>
+</head>
+<body>
+<div id="myDiv">点击右键或按下ctrl+click 打开上下文菜单</div>
+<ul id="myMenu" style="position: absolute;visibility: hidden;background-color: lightblue">
+    <li><a href="eventType2.html"> abc</a></li>
+    <li>abcd</li>
+    <li>abcde</li>
+</ul>
+
+<script type="text/javascript" src="EventUtil.js"></script>
+<script type="text/javascript">
+    EventUtil.addHandler(window,"load",function (event) {
+        var div = document.getElementById("myDiv");
+
+        EventUtil.addHandler(div,"contextmenu",function (event) {
+            event = EventUtil.getEvent(event);
+            EventUtil.preventDefault(event);
+
+            var menu = document.getElementById("myMenu");
+            menu.style.left = event.clientX + "px";
+            menu.style.top = event.clientY + "px";
+            menu.style.visibility = "visible";
+        });
+
+        EventUtil.addHandler(document,"click",function (event) {
+            document.getElementById("myMenu").style.visibility="hidden";
+        })
+    })
+</script>
+</body>
+</html>

@@ -132,7 +132,7 @@ btn.detachEvent("onclick",handle);
 addHandler() 和 removeHandler() 方法接受3个参数：要操作的元素、事件名称和事件处理程序函数。它的职责是视情况分别使用DOM0级方法、DOM2级方法或IE方法来添加事件。这个方法属于一个名叫EventUtil的对象
 ``` 
 var EventUtil = {
-    addHandle:function(element,type,handler){
+    addHandler:function(element,type,handler){
         if(element.addEventListener){
             element.addEventListener(type,handler,false);
         }else if(element.attachEvent){
@@ -158,6 +158,6 @@ var handler = function(){
     alert(this.id);
 }
 
-EventUtil.addHandle(btn,"click",handler);
+EventUtil.addHandler(btn,"click",handler);
 EventUtil.removeHandle(btn,"click",handler);
 ```

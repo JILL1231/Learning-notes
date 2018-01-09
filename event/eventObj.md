@@ -102,25 +102,7 @@ btn.attachEvent("click",function(event){
 
 ``` 
 var EventUtil = {
-    //跨浏览器的事件处理程序
-    addHandle:function(element,type,handler){
-        if(element.addEventListener){
-            element.addEventListener(type,handler,false);
-        }else if(element.attachEvent){
-            element.attachEvent("on"+type,handler);
-        }else{
-            element["on"+type] = handler;
-        }
-    },
-    removeHandle:function(element,type,handler){
-        if(element.removeEventListener){
-            element.removeEventListener(type,handle,false);
-        }else if(element.removeEventListener){
-            element.detachEvent("on"+type,handle);
-        }else{
-            element["on"+type] = null;
-        }    
-    },
+    ...
     getEvent:function(event){
         return event ? event : window.event;
     },

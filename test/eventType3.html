@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="contextmenu.html">dasd</a>
+<script type="text/javascript" src="EventUtil.js"></script>
+<script type="text/javascript">
+    (function(){
+        var showCount = 0;
+
+        EventUtil.addHandler(window,"load",function (event) {
+            alert("Load fired");
+        });
+
+        EventUtil.addHandler(window,"pageshow",function (event) {
+            showCount++;
+            alert("show has been fired "+showCount + "time . Persisted ? "+event.persisted);
+        })
+    })()
+
+    EventUtil.addHandler(window,"hashchange",function (event) {
+        //oldURL和newURL 支持不高
+        console.log("Old URL : " + event.oldURL + "\nNew URL : " + event.newURL);
+
+        console.log("current hash : " + location.hash);
+    })
+</script>
+</body>
+</html>
