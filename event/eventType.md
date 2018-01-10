@@ -2,6 +2,8 @@
 
 Web浏览器中可能发生的事件有很多类型。如前所述，不同的事件类型具有不同的信息，而"DOM3级事件"规定了以下8类事件
 
+兼容性参差不齐，调用时建议先查看[兼容性](https://caniuse.com/)
+
 #### UI事件，当用户与页面上的元素交互时触发[向后兼容]
 
 * load事件
@@ -203,7 +205,7 @@ EventUtil.addHandler(window,"resize",function(event){
 
 * 屏幕坐标位置 screenX 和screenY :鼠标事件发生时鼠标指针相对于整个屏幕的坐标信息
 
-![坐标位置](https://static.oschina.net/uploads/img/201801/05113145_2VsZ.jpg)
+![坐标位置](https://static.oschina.net/uploads/img/201801/05113145_2VsZ.jpg "坐标位置")
 
 注意：
 1、x/y与clientX/Y相同，但有兼容问题。firefox浏览器不支持x/y，且IE7-浏览器把视口的左上角坐标设置为(2,2)，其他浏览器则将(0,0)作为起点坐标，所以存在(2,2)的差距
@@ -524,3 +526,140 @@ EventUtil.addHandler(window,"hashchange",function (event) {
 ``` 
 var isSupported = ("onhashchange" in  window ) && (document.documentMode === undefined || document.documentMode > 7);
 ```
+
+#### 设备事件
+
+##### 1、orientationchange 事件 
+确定用户何时将设备由横向查看模式切换为纵向查看模式。移动Safari的window.orientation属性值可能包含3个值：
+* 0表示肖像模式
+* 90表示向左旋转的横向模式
+* -90表示向右旋转的横向模式
+``` 
+EventUtil.addHandler(window,"load",function (event) {
+    var div = document.getElementById("myDiv");
+    div.innerHTML = "Current orientation is "+window.orientation;
+    EventUtil.addHandler(window,"orientationchange",function (event) {
+        div.innerHTML = "Current orientation is "+window.orientation;
+    })
+})
+```
+
+##### 2、MozOrientation 事件
+FF3.6为检测设备的方向引入MozOrientation事件[前缀Moz表示这是特定于浏览器开发商的事件，不是标准事件]但这个事件与IOS中的orientationchange事件不同，该事件只能提供一个平面的方向变化
+
+此时的event对象包含三个属性：x,y和z。这几个属性的值都介于1到－1之间，表示不同坐标轴上的方向
+* 静止状态 ：x = y = 0 ,z = 1(表示设备处于竖直状态)
+* 设备向右倾斜，x值会减小，反之，向左倾斜，x值会增大
+* 设备向远离用户的方向倾斜，y值会减小，反之，向接近用户的方向倾斜，y值会增大
+* z值检测垂直加速度，1表示静止不动，在设备移动时值会减小
+``` 
+EventUtil.addHandler(window,"MozOrientation",function (event) {
+    var div = document.getElementById("myDiv");
+    div.innerHTML = "X = "+event.x +",Y = "+event.y +",Z = "+event.z;
+})
+```
+只有带加速计的设备才支持MozOrientation
+
+##### 3、deviceorientation 事件
+deviceorientation事件也是在加速计检测到设备方向变化时在window对象上触发，而且具有与MozOrientation事件相同的支持限制。不过，deviceorientation事件的意图是告诉开发人员设备在空间中朝向哪儿，而不是如何移动
+
+设备在三维空间中是靠 x,y和z 轴来定位的。当设备静止放在水平表面上时，这三个值都是0。x轴方向是从左往右，y轴方向从下往上，z轴方向是从后往前
+![deviceorientation事件](https://i-technet.sec.s-msft.com/dynimg/IC677939.png)
+
+触发deviceorientation事件时，事件对象中包含着每个轴相对于设备静止状态下发生变化的信息。事件对象包含以下5个属性
+
+* alpha：在围绕Z轴旋转时(即左右旋转时)Y轴的度数差［0 - 360之间的浮点数］
+* beta：在围绕X轴旋转时(即前后旋转时)Z轴的度数差［－180 － 180之间的浮点数］
+* gamma：在围绕Y轴旋转时(即扭转设备时)Z轴的度数差［－90 － 90之间的浮点数］
+* absolute：表示设备是否返回一个绝对值 ，布尔值
+* compassCalibrated：表示用户的指南针是否校准过 ，布尔值
+
+##### 4、devicemotion 事件
+这个事件告诉开发者 设备什么时候移动，而不仅仅是设备方向如何改变。事件对象包含以下属性
+* acceleration:一个包含 X ,Y 和 Z属性的对象，在不考虑重力的情况下，告诉你在每个方向上的加速度
+* accelerationIncludingGravity:一个包含 X ,Y 和 Z属性的对象，在考虑Z轴自然重力加速度的情况下，告诉你在每个方向上的加速度
+* rotationRate:一个包含表示方向的alpha beta gamma属性的对象
+
+若读取不到以上三个属性的值，则它们的值为null
+* interval:以毫秒表示的时间值，必须在另一个devicemotion事件出发前传入 ［常量］
+
+#### 触摸与手势事件
+
+##### 触摸事件
+* touchstart：当手指触摸屏幕时触发；即使已经有一个手指放在了屏幕上也会触发。
+* touchmove：当手指在屏幕上滑动时连续地触发。在这个世界发生期间，调用preventDefault()可以阻止滚动。
+* touchend：当手指在屏幕上移开时触发。
+* touchcancel：当系统停止跟踪触摸时触发。关于此事件的确切触发时间，文档中没有明确说明。
+
+上面这几个事件都会冒泡，也都可以取消。虽然这些触摸事件没有在DOM规范中定义，但它们却是以兼容DOM的方式实现的。因此，每个触摸事件的event对象都提供了鼠标事件中常见的属性：bubbles,cancelable,view,clientX,clientY,screenX,screenY,detail,altKey,shiftKey,ctrlKey和metaKey。
+
+除了常见的DOM属性外，触摸世界还包含下列三个用于跟踪触摸的属性。
+
+* touches:表示当前跟踪的触摸操作的Touch对象的数组。
+* targetTouches:特定于事件目标的Touch对象的数组。
+* changedTouches:表示字上次触摸以来发生了什么改变的Touch对象的数组。
+
+每个Touch对象包含下列属性：
+
+* clientX:触摸目标在视口中的x坐标。
+* clientY：触摸目标在视口中的y坐标。
+* identifier:标识触摸的唯一ID。
+* pageX：触摸目标在页面中的x坐标。
+* pageY：触摸目标在页面中的y坐标。
+* screenX：触摸目标在屏幕中的x坐标。
+* screenY：触摸目标在屏幕中的y坐标。
+* target：触摸的DOM节点目标。
+
+``` 
+function handlerTouchEvent(event) {
+    //只跟踪一次触摸
+    //因为当触发touchend事件的时候，event.touches.length等于0
+    if (event.touches.length == 1 || event.touches.length == 0) {
+        var output = document.getElementById("output");
+        switch (event.type) {
+            case "touchstart":
+                output.innerHTML = "Touch started ( " + event.touches[0].clientX + ", " + event.touches[0].clientY + ")";
+                break;
+            case "touchend":
+                //在touched事件发生时，touches集合中就没有任何Touch对象了，因为不存在活动的触摸操作；此时，就必须转而使用changedTouches集合。
+                output.innerHTML += "<br/>Touch ended (" + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + ")";
+                break;
+            case "touchmove":
+                event.preventDefault(); //取消其默认行为[滚动页面]，阻止滚动
+                output.innerHTML += "<br/>Touch moved (" + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + ")";
+        }
+    }
+}
+
+EventUtil.addHandler(document, "touchstart", handlerTouchEvent);
+EventUtil.addHandler(document, "touchend", handlerTouchEvent);
+EventUtil.addHandler(document, "touchmove", handlerTouchEvent);
+```
+这些事件会在文档的所有元素上面触发，因而可以分别操作页面的不同部分。在触摸屏幕上的元素时，这些事件（包括鼠标事件） 发生的顺序如下：
+
+* touchstart
+* mouseover
+* mousemove（一次）
+* mousedown
+* mouseup
+* click
+* touched
+
+##### 手势事件
+
+当两个手指触摸屏幕时就会产生手势，手势通常会改变显示项的大小，或者旋转显示项。有三个手势事件，如下：
+
+* gesturestart:当一个手指已经按在屏幕上而另一个手指又触摸屏幕时触发。
+* gesturechange:当触摸屏幕的任何一个手指的位置发生变化时触发。
+* gestureend:当任何一个手指从屏幕上移开时触发。
+
+只有两个手指都触摸到事件的接收容器时才会触发这些事件。
+
+在一个元素上设置事件处理程序，意味着两个手指必须同时位于该元素的范围之内，才能触发手势事件（这个元素就是目标）。
+
+由于这些事件冒泡，所以将事件处理程序放在文档上也可以处理所有手势事件。
+
+每个手势事件的event对象都包含着标准的鼠标事件属性：bubbles,cancelable,view,clientX,clientY,screenX,screenY,detail,altKey,shiftKey,ctrlKey和metaKey。此外还有两个额外的属性：rotation和scale。
+
+* rotation属性：表示手指变化引起的旋转角度，负值表示逆时针旋转，正值表示顺时针旋转（该值从0开始）。
+* scale属性：表示两个手指间距离的变化情况（例如向内收缩会缩短距离）；这个值从1开始，并随距离拉大而增长，随距离缩短而减小。

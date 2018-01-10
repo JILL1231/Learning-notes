@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="output"></div>
+<script type="text/javascript" src="EventUtil.js"></script>
+<script type="text/javascript">
+    function handlerTouchEvent(event) {
+        //只跟踪一次触摸
+        //因为当触发touchend事件的时候，event.touches.length等于0
+        if (event.touches.length == 1 || event.touches.length == 0) {
+            var output = document.getElementById("output");
+            switch (event.type) {
+                case "touchstart":
+                    output.innerHTML = "Touch started ( " + event.touches[0].clientX + ", " + event.touches[0].clientY + ")";
+                    break;
+                case "touchend":
+                    //在touched事件发生时，touches集合中就没有任何Touch对象了，因为不存在活动的触摸操作；此时，就必须转而使用changedTouches集合。
+                    output.innerHTML += "<br/>Touch ended (" + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + ")";
+                    break;
+                case "touchmove":
+                    event.preventDefault(); //取消其默认行为[滚动页面]，阻止滚动
+                    output.innerHTML += "<br/>Touch moved (" + event.changedTouches[0].clientX + ", " + event.changedTouches[0].clientY + ")";
+            }
+        }
+    }
+
+    EventUtil.addHandler(document, "touchstart", handlerTouchEvent);
+    EventUtil.addHandler(document, "touchend", handlerTouchEvent);
+    EventUtil.addHandler(document, "touchmove", handlerTouchEvent);
+</script>
+</body>
+</html>

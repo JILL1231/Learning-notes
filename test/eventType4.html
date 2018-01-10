@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="myDiv"></div>
+<script type="text/javascript" src="EventUtil.js"></script>
+<script type="text/javascript">
+    EventUtil.addHandler(window,"load",function (event) {
+        var div = document.getElementById("myDiv");
+        div.innerHTML = "Current orientation is "+window.orientation;
+        EventUtil.addHandler(window,"orientationchange",function (event) {
+            div.innerHTML = "Current orientation is "+window.orientation;
+        })
+    })
+</script>
+</body>
+</html>
