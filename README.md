@@ -69,25 +69,14 @@
 
 [3、事件类型](https://github.com/JILL1231/Learning-notes/blob/master/event/eventType.md)
 
-[](https://github.com/JILL1231/Learning-notes/blob/master/event/)
+[4、内存和性能](https://github.com/JILL1231/Learning-notes/blob/master/event/eventPerform.md)
 
-#### 十、表单脚本
+#### 七、表单脚本
 
-#### 十一、使用Canvas绘图
+#### 八、JSON
+[json](https://github.com/JILL1231/Learning-notes/blob/master/json/json.md)
 
-#### 十二、HTML5脚本编程
-
-#### 六、客户端检测
-
-#### 十三、错误处理与调试
-
-#### 十四、JavaScript与XML
-
-#### 十五、E4X
-
-#### 十六、JSON
-
-#### 十七、Ajax与Comet
+#### 九、Ajax与Comet
 
 #### 十八、高级技巧
 

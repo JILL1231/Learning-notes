@@ -86,5 +86,20 @@ var EventUtil = {
         }else{
             return event.keyCode;
         }
+    },
+    //从剪贴板取得数据
+    getClipboardText:function (event) {
+        var clipboardData = (event.clipboardData || window.clipboardData);
+        return clipboardData.getData("text");
+    },
+    //将文本放到剪贴板去
+    setClipboardText:function (event,value) {
+        if(event.clipboardData){
+            //Safari Chrome
+            return event.clipboardData.setData("text/plain",value);
+        }else if(window.clipboardData){
+            //IE
+            return window.clipboardData.setData("text",value);
+        }
     }
 }
