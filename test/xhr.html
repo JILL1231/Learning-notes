@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    function createXHR() {
+        //检测原生XHR对象是否存在
+        if (typeof XMLHttpRequest !== "undefined") {
+            return new XMLHttpRequest();
+        }
+        //检测ActiveX对象
+        else if (typeof ActiveXObject !== "undefined") {
+            if (typeof arguments.callee.activeXString !== "string") {
+                var versions = ["MSXML2.XMLHttp6.0", "MSXML2.XMLHttp3.0", "MSXML2.XMLHttp"], i, len;
+                for (i = 0; i < versions.length; i++) {
+                    try {
+                        new ActiveXObject(versions[i]);
+                        arguments.callee.activeXString = versions[i];
+                        break;
+                    } catch (ex) {
+                        console.log("检测ActiveX对象出错");
+                    }
+                }
+            }
+            return new ActiveXObject(arguments.callee.activeXString);
+        } else {
+            throw new Error("NO XML OBJECT AVAILABLE")
+        }
+    };
+
+    //get请求：确保查询字符串格式良好
+    function addURIParam(url, name, value) {
+        url += (url.indexOf("?") === -1 ? "?" : "&");
+        url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
+        return url;
+    }
+
+    //创建XMLHttpRequest对象
+    var xhr = createXHR();
+
+    var url = "example.php";
+    //添加参数
+    url = addURIParam(url, "name", "jill");
+    url = addURIParam(url, "school", "shenda");
+
+    //只要readyState属性的值由一个值变成另一个值，都会触发一次readystatechange事件，利用这个事件检测每次状态变化后的readyState的值
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            //一般来说，状态代码为200标志成功，此外，状态代码为304表示请求的资源并没有被修改，可以直接用浏览器中缓存的版本
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                console.log(xhr.responseText);
+            } else {
+                console.log("request was unsuccesssful: " + xhr.status);
+            }
+        }
+    };
+
+    //初始化请求
+    xhr.open(get, url, false);
+    //发送请求
+    xhr.send(null);
+</script>
+
+<script type="text/javascript">
+    function submitData() {
+        var xhr = createXHR();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                    alert(xhr.resopnseText);
+                } else {
+                    alert("Request was unsuccessful: " + xhr.status);
+                }
+            }
+        };
+
+        xhr.open("post", "postExample.php", true);
+        // 将dataURL转换为Blob对象
+        var blob = dataURLtoBlob(base64);
+        //通过formData创建表单数据
+        var formId = $("#formPic");
+        var formData = new FormData(formId);
+        //用 append 以键值的形式将数据加入进去
+        formData.append("image_file", blob);
+        formData.append("return_landmark", 1);
+        xhr.send(formData);
+    }
+</script>
+</body>
+</html>
